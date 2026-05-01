@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProjectFlow - Project Management System</title>
+    <title>TaskFlow - Modern Project Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,99 +14,132 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
 
-        /* Auth Forms */
+        /* Glassmorphism Auth Container */
         .auth-container {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .auth-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 48px;
             width: 100%;
-            max-width: 400px;
+            max-width: 440px;
+            transition: transform 0.3s ease;
+        }
+
+        .auth-card:hover {
+            transform: translateY(-5px);
         }
 
         .auth-card h2 {
-            margin-bottom: 30px;
-            color: #333;
+            margin-bottom: 32px;
+            color: #1a1a2e;
             text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: 500;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
             font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         .btn {
             width: 100%;
-            padding: 12px;
-            background: #667eea;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 12px;
             font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
-            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
 
         .auth-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 24px;
             color: #666;
         }
 
         .auth-link a {
             color: #667eea;
             text-decoration: none;
+            font-weight: 600;
         }
 
         /* Dashboard */
         .dashboard {
             display: none;
+            background: #f5f5f5;
         }
 
+        /* Navbar */
         .navbar {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 15px 30px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            padding: 16px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .nav-brand {
-            font-size: 24px;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-user {
@@ -114,88 +149,124 @@
         }
 
         .role-badge {
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 6px 14px;
+            border-radius: 20px;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .role-admin {
-            background: #f56565;
+            background: linear-gradient(135deg, #f56565 0%, #ed64a6 100%);
             color: white;
         }
 
         .role-member {
-            background: #48bb78;
+            background: linear-gradient(135deg, #48bb78 0%, #38b2ac 100%);
             color: white;
         }
 
         .logout-btn {
-            background: #f56565;
-            padding: 8px 15px;
+            background: linear-gradient(135deg, #f56565 0%, #ed64a6 100%);
+            padding: 8px 20px;
             width: auto;
         }
 
+        /* Container */
         .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+            max-width: 1400px;
+            margin: 32px auto;
+            padding: 0 24px;
         }
 
         /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
         }
 
         .stat-card {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 24px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
         }
 
         .stat-card h3 {
             color: #666;
             font-size: 14px;
-            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
         }
 
         .stat-card .number {
-            font-size: 32px;
-            font-weight: bold;
-            color: #333;
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* Sections */
         .section {
             background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
             border-bottom: 2px solid #f0f0f0;
         }
 
         .section-header h2 {
-            color: #333;
-            font-size: 20px;
+            color: #1a1a2e;
+            font-size: 24px;
+            font-weight: 700;
         }
 
-        .btn-small {
-            width: auto;
-            padding: 8px 15px;
-            font-size: 14px;
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         /* Tables */
@@ -210,23 +281,31 @@
         }
 
         th, td {
-            padding: 12px;
+            padding: 16px;
             text-align: left;
             border-bottom: 1px solid #f0f0f0;
         }
 
         th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #555;
+            background: #fafafa;
+            font-weight: 700;
+            color: #1a1a2e;
+            font-size: 14px;
+        }
+
+        td {
+            font-size: 14px;
+            color: #333;
         }
 
         .status-badge {
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 6px 12px;
+            border-radius: 20px;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 600;
             display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .status-todo {
@@ -246,7 +325,7 @@
 
         .priority-high {
             color: #e53e3e;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .priority-medium {
@@ -257,18 +336,24 @@
             color: #48bb78;
         }
 
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
         .icon-btn {
-            padding: 5px 10px;
+            padding: 6px 12px;
             font-size: 12px;
             width: auto;
             cursor: pointer;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin: 0 4px;
+            transition: all 0.3s ease;
         }
 
+        .icon-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -276,7 +361,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -284,16 +370,49 @@
 
         .modal-content {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
+            padding: 32px;
+            border-radius: 24px;
             width: 90%;
             max-width: 500px;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h2 {
+            margin-bottom: 24px;
+            color: #1a1a2e;
+            font-size: 28px;
+            font-weight: 700;
         }
 
         .overdue {
             background-color: #fff5f5;
+            border-left: 4px solid #f56565;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 48px;
+            color: #999;
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            margin-bottom: 16px;
+            color: #ddd;
         }
 
         @media (max-width: 768px) {
@@ -303,7 +422,12 @@
             
             th, td {
                 font-size: 12px;
-                padding: 8px;
+                padding: 10px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 12px;
             }
         }
     </style>
@@ -312,42 +436,42 @@
     <!-- Auth Container -->
     <div id="authContainer" class="auth-container">
         <div id="loginForm" class="auth-card">
-            <h2>Login to ProjectFlow</h2>
+            <h2><i class="fas fa-tasks"></i> Welcome Back!</h2>
             <form id="loginFormElement">
                 <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="loginEmail" required>
+                    <label><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="loginEmail" placeholder="admin@admin.com" required>
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="loginPassword" required>
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••" required>
                 </div>
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn"><i class="fas fa-arrow-right"></i> Login</button>
             </form>
             <div class="auth-link">
-                Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>
+                New here? <a href="#" onclick="showSignup()">Create Account <i class="fas fa-user-plus"></i></a>
             </div>
         </div>
 
         <div id="signupForm" class="auth-card" style="display:none;">
-            <h2>Sign Up</h2>
+            <h2><i class="fas fa-user-plus"></i> Join TaskFlow</h2>
             <form id="signupFormElement">
                 <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" id="signupName" required>
+                    <label><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="signupName" placeholder="John Doe" required>
                 </div>
                 <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="signupEmail" required>
+                    <label><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="signupEmail" placeholder="john@example.com" required>
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="signupPassword" required>
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
                 </div>
-                <button type="submit" class="btn">Sign Up</button>
+                <button type="submit" class="btn"><i class="fas fa-check-circle"></i> Sign Up</button>
             </form>
             <div class="auth-link">
-                Already have an account? <a href="#" onclick="showLogin()">Login</a>
+                Already have an account? <a href="#" onclick="showLogin()">Login <i class="fas fa-sign-in-alt"></i></a>
             </div>
         </div>
     </div>
@@ -355,11 +479,11 @@
     <!-- Dashboard -->
     <div id="dashboard" class="dashboard">
         <nav class="navbar">
-            <div class="nav-brand">ProjectFlow</div>
+            <div class="nav-brand"><i class="fas fa-rocket"></i> TaskFlow Pro</div>
             <div class="nav-user">
                 <span id="userName"></span>
                 <span id="userRole" class="role-badge"></span>
-                <button class="btn logout-btn" onclick="logout()">Logout</button>
+                <button class="btn logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </div>
         </nav>
 
@@ -367,47 +491,47 @@
             <!-- Stats -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3>Total Projects</h3>
+                    <h3><i class="fas fa-folder"></i> Total Projects</h3>
                     <div class="number" id="totalProjects">0</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Total Tasks</h3>
+                    <h3><i class="fas fa-tasks"></i> Total Tasks</h3>
                     <div class="number" id="totalTasks">0</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Completed Tasks</h3>
+                    <h3><i class="fas fa-check-circle"></i> Completed</h3>
                     <div class="number" id="completedTasks">0</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Overdue Tasks</h3>
+                    <h3><i class="fas fa-exclamation-triangle"></i> Overdue</h3>
                     <div class="number" id="overdueTasks">0</div>
                 </div>
             </div>
 
-            <!-- Projects Section -->
+            <!-- Projects -->
             <div class="section">
                 <div class="section-header">
-                    <h2>Projects</h2>
-                    <button class="btn btn-small" onclick="showCreateProjectModal()" id="createProjectBtn">+ Create Project</button>
+                    <h2><i class="fas fa-folder-open"></i> Projects</h2>
+                    <button class="btn-primary" onclick="showCreateProjectModal()" id="createProjectBtn"><i class="fas fa-plus"></i> New Project</button>
                 </div>
                 <div class="project-table">
-                    <table id="projectsTable">
+                    <table>
                         <thead>
-                            <tr><th>Project Name</th><th>Description</th><th>Team Members</th><th>Actions</th></tr>
+                            <tr><th>Project Name</th><th>Description</th><th>Tasks</th><th>Actions</th></tr>
                         </thead>
                         <tbody id="projectsList"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Tasks Section -->
+            <!-- Tasks -->
             <div class="section">
                 <div class="section-header">
-                    <h2>Tasks</h2>
-                    <button class="btn btn-small" onclick="showCreateTaskModal()" id="createTaskBtn">+ Create Task</button>
+                    <h2><i class="fas fa-list-check"></i> Tasks</h2>
+                    <button class="btn-primary" onclick="showCreateTaskModal()" id="createTaskBtn"><i class="fas fa-plus"></i> New Task</button>
                 </div>
                 <div class="task-table">
-                    <table id="tasksTable">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Task</th><th>Project</th><th>Assigned To</th><th>Priority</th><th>Status</th><th>Due Date</th><th>Actions</th>
@@ -423,80 +547,77 @@
     <!-- Modals -->
     <div id="projectModal" class="modal">
         <div class="modal-content">
-            <h2 id="projectModalTitle">Create Project</h2>
+            <h2><i class="fas fa-folder-plus"></i> Create Project</h2>
             <form id="projectForm">
                 <input type="hidden" id="projectId">
                 <div class="form-group">
                     <label>Project Name</label>
-                    <input type="text" id="projectName" required>
+                    <input type="text" id="projectName" placeholder="e.g., Website Redesign" required>
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea id="projectDesc" rows="3"></textarea>
+                    <textarea id="projectDesc" rows="3" placeholder="Describe your project..."></textarea>
                 </div>
-                <button type="submit" class="btn">Save</button>
-                <button type="button" class="btn" onclick="closeModal('projectModal')" style="margin-top:10px;background:#ccc;">Cancel</button>
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Save Project</button>
+                <button type="button" class="btn" onclick="closeModal('projectModal')" style="margin-top:10px;background:#ccc;"><i class="fas fa-times"></i> Cancel</button>
             </form>
         </div>
     </div>
 
     <div id="taskModal" class="modal">
         <div class="modal-content">
-            <h2 id="taskModalTitle">Create Task</h2>
+            <h2><i class="fas fa-tasks"></i> Create Task</h2>
             <form id="taskForm">
                 <input type="hidden" id="taskId">
                 <div class="form-group">
                     <label>Task Title</label>
-                    <input type="text" id="taskTitle" required>
+                    <input type="text" id="taskTitle" placeholder="e.g., Design Homepage" required>
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea id="taskDesc" rows="3"></textarea>
+                    <textarea id="taskDesc" rows="3" placeholder="Task details..."></textarea>
                 </div>
                 <div class="form-group">
                     <label>Project</label>
                     <select id="taskProjectId" required></select>
                 </div>
                 <div class="form-group">
-                    <label>Assigned To</label>
+                    <label>Assign To</label>
                     <select id="taskAssignee"></select>
                 </div>
                 <div class="form-group">
                     <label>Priority</label>
                     <select id="taskPriority">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
+                        <option value="low">🟢 Low</option>
+                        <option value="medium">🟡 Medium</option>
+                        <option value="high">🔴 High</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Status</label>
                     <select id="taskStatus">
-                        <option value="todo">To Do</option>
-                        <option value="progress">In Progress</option>
-                        <option value="done">Done</option>
+                        <option value="todo">📋 To Do</option>
+                        <option value="progress">⚡ In Progress</option>
+                        <option value="done">✅ Done</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Due Date</label>
                     <input type="date" id="taskDueDate" required>
                 </div>
-                <button type="submit" class="btn">Save</button>
-                <button type="button" class="btn" onclick="closeModal('taskModal')" style="margin-top:10px;background:#ccc;">Cancel</button>
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Save Task</button>
+                <button type="button" class="btn" onclick="closeModal('taskModal')" style="margin-top:10px;background:#ccc;"><i class="fas fa-times"></i> Cancel</button>
             </form>
         </div>
     </div>
 
     <script>
-        // API Base URL (Railway deployment)
-        const API_BASE = window.location.origin;
-        
+        const API_BASE = '';
         let currentUser = null;
         let projects = [];
         let tasks = [];
         let users = [];
 
-        // Auth Functions
         async function login(email, password) {
             try {
                 const response = await fetch(`${API_BASE}/api/login`, {
@@ -524,11 +645,11 @@
                 const response = await fetch(`${API_BASE}/api/signup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, password, role: 'member' })
+                    body: JSON.stringify({ name, email, password })
                 });
                 const data = await response.json();
                 if (response.ok) {
-                    alert('Signup successful! Please login.');
+                    alert('✅ Signup successful! Please login.');
                     showLogin();
                 } else {
                     alert(data.error || 'Signup failed');
@@ -577,24 +698,28 @@
             document.getElementById('totalTasks').textContent = tasks.length;
             const completed = tasks.filter(t => t.status === 'done').length;
             document.getElementById('completedTasks').textContent = completed;
-            const overdue = tasks.filter(t => t.status !== 'done' && new Date(t.dueDate) < new Date()).length;
+            const overdue = tasks.filter(t => t.status !== 'done' && new Date(t.due_date) < new Date()).length;
             document.getElementById('overdueTasks').textContent = overdue;
         }
 
         function renderProjects() {
             const tbody = document.getElementById('projectsList');
             tbody.innerHTML = '';
+            if (projects.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="empty-state"><i class="fas fa-folder-open"></i><br>No projects yet. Create your first project!</td></tr>';
+                return;
+            }
             projects.forEach(project => {
                 const row = tbody.insertRow();
-                row.insertCell(0).textContent = project.name;
-                row.insertCell(1).textContent = project.description || '-';
-                const taskCount = tasks.filter(t => t.projectId === project.id).length;
+                row.insertCell(0).innerHTML = `<strong>${project.name}</strong>`;
+                row.insertCell(1).textContent = project.description || '—';
+                const taskCount = tasks.filter(t => t.project_id === project.id).length;
                 row.insertCell(2).textContent = `${taskCount} tasks`;
                 const actions = row.insertCell(3);
                 if (currentUser.role === 'admin') {
-                    actions.innerHTML = `<button class="icon-btn" onclick="deleteProject(${project.id})">Delete</button>`;
+                    actions.innerHTML = `<button class="icon-btn" onclick="deleteProject(${project.id})"><i class="fas fa-trash"></i></button>`;
                 } else {
-                    actions.textContent = '-';
+                    actions.textContent = '—';
                 }
             });
         }
@@ -602,29 +727,36 @@
         function renderTasks() {
             const tbody = document.getElementById('tasksList');
             tbody.innerHTML = '';
-            const filteredTasks = currentUser.role === 'admin' ? tasks : tasks.filter(t => t.assigneeId === currentUser.id);
+            const filteredTasks = currentUser.role === 'admin' ? tasks : tasks.filter(t => t.assignee_id === currentUser.id);
             
+            if (filteredTasks.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><i class="fas fa-check-circle"></i><br>No tasks yet. Create your first task!</td></tr>';
+                return;
+            }
+
             filteredTasks.forEach(task => {
                 const row = tbody.insertRow();
-                if (task.status !== 'done' && new Date(task.dueDate) < new Date()) {
+                if (task.status !== 'done' && new Date(task.due_date) < new Date()) {
                     row.classList.add('overdue');
                 }
-                row.insertCell(0).textContent = task.title;
-                const project = projects.find(p => p.id === task.projectId);
-                row.insertCell(1).textContent = project ? project.name : '-';
-                const assignee = users.find(u => u.id === task.assigneeId);
+                row.insertCell(0).innerHTML = `<strong>${task.title}</strong><br><small>${task.description || ''}</small>`;
+                const project = projects.find(p => p.id === task.project_id);
+                row.insertCell(1).textContent = project ? project.name : '—';
+                const assignee = users.find(u => u.id === task.assignee_id);
                 row.insertCell(2).textContent = assignee ? assignee.name : 'Unassigned';
-                row.insertCell(3).innerHTML = `<span class="priority-${task.priority}">${task.priority}</span>`;
-                row.insertCell(4).innerHTML = `<select class="status-badge" onchange="updateTaskStatus(${task.id}, this.value)">
-                    <option value="todo" ${task.status === 'todo' ? 'selected' : ''}>To Do</option>
-                    <option value="progress" ${task.status === 'progress' ? 'selected' : ''}>In Progress</option>
-                    <option value="done" ${task.status === 'done' ? 'selected' : ''}>Done</option>
+                row.insertCell(3).innerHTML = `<span class="priority-${task.priority}"><i class="fas fa-flag"></i> ${task.priority}</span>`;
+                row.insertCell(4).innerHTML = `<select class="status-badge status-${task.status}" onchange="updateTaskStatus(${task.id}, this.value)">
+                    <option value="todo" ${task.status === 'todo' ? 'selected' : ''}>📋 To Do</option>
+                    <option value="progress" ${task.status === 'progress' ? 'selected' : ''}>⚡ In Progress</option>
+                    <option value="done" ${task.status === 'done' ? 'selected' : ''}>✅ Done</option>
                 </select>`;
-                row.insertCell(5).textContent = new Date(task.dueDate).toLocaleDateString();
+                row.insertCell(5).innerHTML = task.due_date ? `<i class="fas fa-calendar"></i> ${new Date(task.due_date).toLocaleDateString()}` : 'No date';
                 const actions = row.insertCell(6);
-                if (currentUser.role === 'admin' || task.assigneeId === currentUser.id) {
-                    actions.innerHTML = `<button class="icon-btn" onclick="editTask(${task.id})">Edit</button>
-                                        <button class="icon-btn" onclick="deleteTask(${task.id})">Delete</button>`;
+                if (currentUser.role === 'admin' || task.assignee_id === currentUser.id) {
+                    actions.innerHTML = `<button class="icon-btn" onclick="editTask(${task.id})"><i class="fas fa-edit"></i></button>
+                                        <button class="icon-btn" onclick="deleteTask(${task.id})"><i class="fas fa-trash"></i></button>`;
+                } else {
+                    actions.textContent = '—';
                 }
             });
         }
@@ -641,6 +773,7 @@
             if (response.ok) {
                 await loadData();
                 closeModal('projectModal');
+                document.getElementById('projectForm').reset();
             } else {
                 alert('Failed to create project');
             }
@@ -658,20 +791,30 @@
             }
         }
 
-        async function createTask(task) {
+        async function createTask(taskData) {
             const response = await fetch(`${API_BASE}/api/tasks`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
-                body: JSON.stringify(task)
+                body: JSON.stringify({
+                    title: taskData.title,
+                    description: taskData.description,
+                    projectId: parseInt(taskData.projectId),
+                    assigneeId: taskData.assigneeId ? parseInt(taskData.assigneeId) : null,
+                    priority: taskData.priority,
+                    status: taskData.status,
+                    dueDate: taskData.dueDate
+                })
             });
             if (response.ok) {
                 await loadData();
                 closeModal('taskModal');
+                document.getElementById('taskForm').reset();
             } else {
-                alert('Failed to create task');
+                const data = await response.json();
+                alert('Failed to create task: ' + (data.error || 'Unknown error'));
             }
         }
 
@@ -701,12 +844,28 @@
             }
         }
 
+        function editTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                document.getElementById('taskModalTitle').textContent = 'Edit Task';
+                document.getElementById('taskId').value = task.id;
+                document.getElementById('taskTitle').value = task.title;
+                document.getElementById('taskDesc').value = task.description || '';
+                document.getElementById('taskProjectId').value = task.project_id;
+                document.getElementById('taskAssignee').value = task.assignee_id || '';
+                document.getElementById('taskPriority').value = task.priority;
+                document.getElementById('taskStatus').value = task.status;
+                document.getElementById('taskDueDate').value = task.due_date || '';
+                document.getElementById('taskModal').style.display = 'flex';
+            }
+        }
+
         function showDashboard() {
             document.getElementById('authContainer').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
-            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userName').innerHTML = `<i class="fas fa-user-circle"></i> ${currentUser.name}`;
             const roleBadge = document.getElementById('userRole');
-            roleBadge.textContent = currentUser.role.toUpperCase();
+            roleBadge.innerHTML = `<i class="fas fa-shield-alt"></i> ${currentUser.role.toUpperCase()}`;
             roleBadge.className = `role-badge role-${currentUser.role}`;
             
             if (currentUser.role !== 'admin') {
@@ -715,14 +874,14 @@
         }
 
         function showCreateProjectModal() {
-            document.getElementById('projectModalTitle').textContent = 'Create Project';
+            document.getElementById('projectModalTitle').innerHTML = '<i class="fas fa-folder-plus"></i> Create Project';
             document.getElementById('projectForm').reset();
             document.getElementById('projectId').value = '';
             document.getElementById('projectModal').style.display = 'flex';
         }
 
         function showCreateTaskModal() {
-            document.getElementById('taskModalTitle').textContent = 'Create Task';
+            document.getElementById('taskModalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> Create Task';
             document.getElementById('taskForm').reset();
             document.getElementById('taskId').value = '';
             
@@ -735,26 +894,10 @@
             const assigneeSelect = document.getElementById('taskAssignee');
             assigneeSelect.innerHTML = '<option value="">Select Assignee</option>';
             users.forEach(u => {
-                assigneeSelect.innerHTML += `<option value="${u.id}">${u.name}</option>`;
+                assigneeSelect.innerHTML += `<option value="${u.id}">${u.name} (${u.role})</option>`;
             });
             
             document.getElementById('taskModal').style.display = 'flex';
-        }
-
-        function editTask(id) {
-            const task = tasks.find(t => t.id === id);
-            if (task) {
-                document.getElementById('taskModalTitle').textContent = 'Edit Task';
-                document.getElementById('taskId').value = task.id;
-                document.getElementById('taskTitle').value = task.title;
-                document.getElementById('taskDesc').value = task.description;
-                document.getElementById('taskProjectId').value = task.projectId;
-                document.getElementById('taskAssignee').value = task.assigneeId;
-                document.getElementById('taskPriority').value = task.priority;
-                document.getElementById('taskStatus').value = task.status;
-                document.getElementById('taskDueDate').value = task.dueDate.split('T')[0];
-                document.getElementById('taskModal').style.display = 'flex';
-            }
         }
 
         function closeModal(modalId) {
@@ -797,17 +940,21 @@
 
         document.getElementById('taskForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const task = {
-                id: document.getElementById('taskId').value || undefined,
+            const taskData = {
                 title: document.getElementById('taskTitle').value,
                 description: document.getElementById('taskDesc').value,
-                projectId: parseInt(document.getElementById('taskProjectId').value),
-                assigneeId: parseInt(document.getElementById('taskAssignee').value),
+                projectId: document.getElementById('taskProjectId').value,
+                assigneeId: document.getElementById('taskAssignee').value,
                 priority: document.getElementById('taskPriority').value,
                 status: document.getElementById('taskStatus').value,
                 dueDate: document.getElementById('taskDueDate').value
             };
-            createTask(task);
+            if (document.getElementById('taskId').value) {
+                updateTaskStatus(document.getElementById('taskId').value, taskData.status);
+                closeModal('taskModal');
+            } else {
+                createTask(taskData);
+            }
         });
 
         // Check for existing session
